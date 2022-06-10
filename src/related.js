@@ -8,7 +8,9 @@ function getRelatedById(current_product_id = 1) {
   let result = [];
   Related.findAll({
     where: {current_product_id},
-    attributes: ['related_product_id']
+    attributes: ['related_product_id'],
+    benchmark: true,
+    logging: console.log
   })
   .then((data) => {
       data.forEach(related_id => {
@@ -19,24 +21,5 @@ function getRelatedById(current_product_id = 1) {
     })
   .catch(err => console.log('Related products call failed. Error: ', err));
 }
-
-// Format data
-
-// Found Product by id:  [
-  // {
-  //   "related_product_id": 5
-  // },
-  // {
-  //   "related_product_id": 9
-  // },
-  // {
-  //   "related_product_id": 7
-  // },
-  // {
-  //   "related_product_id": 2
-  // }
-
-// To
-
 
 getRelatedById(3);
