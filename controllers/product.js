@@ -7,15 +7,18 @@ const {Product, Features} = require('./db.js');
 
 function getProducts(limit = 5, page = 0) {
 
+  let result;
   page = page === 0 ? 0 : page - 1;
-  Product.findAll({
+  return Product.findAll({
     benchmark: true,
     logging: console.log,
     limit,
     offset: (limit * page)})
-  .then(data => console.log("All users: Product ", JSON.stringify(data, null, 2)))
+  .then(data => result = JSON.stringify(data, null, 2))
   .catch(err => console.log('Product failed to return data!\n Error code: ', err));
 }
+
+// console.log(getProducts());
 
 function getProductsById(product_id = 1) {
 
@@ -35,6 +38,9 @@ function getProductsById(product_id = 1) {
   .then(data => console.log('Found Product by id: ', JSON.stringify(data, null, 2)))
 }
 
-getProducts();
+module.exports = {
+  getProducts,
+  getProductsById,
+}
 // Create a function that takes in the Product_Id as a value and adds features to the response call.
 

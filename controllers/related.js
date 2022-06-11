@@ -22,4 +22,6 @@ function getRelatedById(current_product_id = 1) {
   .catch(err => console.log('Related products call failed. Error: ', err));
 }
 
-getRelatedById(3);
+module.exports = {
+  getRelatedById,
+};
