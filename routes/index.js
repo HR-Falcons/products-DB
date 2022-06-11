@@ -20,6 +20,7 @@ app.get('/', (req, res) => {
   res.send('You have connected to the Products API!');
 });
 
+// Product routes
 app.get('/products', (req, res) => {
 
   controllers.product.getProducts()
@@ -27,6 +28,27 @@ app.get('/products', (req, res) => {
   .catch(err => (res.send('Products API has failed!\n Error: ', err)));
 
 });
+
+app.get('/products/:product_id', (req, res) => {
+
+  console.log('param', req.params.product_id);
+  controllers.product.getProductsById(req.params.product_id)
+  .then(data => (res.send(data)))
+  .catch(err => (res.send('Products API has failed!\n Error: ', err)));
+
+});
+
+// Styles routes
+app.get('/products/:product_id/styles', (req, res) => {
+
+  console.log('param', req.params.product_id);
+  controllers.styles.getStylesById(req.params.product_id)
+  .then(data => (res.send(data)))
+  .catch(err => (res.send('Products API has failed!\n Error: ', err)));
+
+});
+
+// End of Product routes
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`)

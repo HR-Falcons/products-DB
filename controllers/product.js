@@ -22,11 +22,12 @@ function getProducts(limit = 5, page = 0) {
 
 function getProductsById(product_id = 1) {
 
+  let result;
   Product.hasMany(Features, {
     foreignKey: 'product_id'
   });
 
-  Product.findByPk(product_id, {include:[
+  return Product.findByPk(product_id, {include:[
     {
       model: Features,
       attributes: ['feature', 'value']
@@ -35,7 +36,8 @@ function getProductsById(product_id = 1) {
     benchmark: true,
     logging: console.log,
   })
-  .then(data => console.log('Found Product by id: ', JSON.stringify(data, null, 2)))
+  .then(data => result = JSON.stringify(data, null, 2))
+  .catch(err => console.log('Product failed to return data!\n Error code: ', err));
 }
 
 module.exports = {

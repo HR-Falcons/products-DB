@@ -4,6 +4,8 @@ const {Styles, Skus, Photos} = require('./db.js');
 
 function getStylesById(product_id = 1) {
 
+  let result;
+
   Styles.hasMany(Photos, {
     foreignKey: 'style_id'
   });
@@ -12,7 +14,7 @@ function getStylesById(product_id = 1) {
     foreignKey: 'style_id'
   });
 
-  Styles.findAll({
+  return Styles.findAll({
     where: {
       product_id,
     },
@@ -31,8 +33,8 @@ function getStylesById(product_id = 1) {
     benchmark: true,
     logging: console.log,
   })
-  .then(data => console.log('Found Style by id: ', JSON.stringify(data, null, 2)))
-  .catch(err => console.log('Style query failed!\n Error: ', err));
+  .then(data => result = JSON.stringify(data, null, 2))
+  .catch(err => console.log('Style query failed!\n Error code: ', err));
 }
 
 module.exports = {
