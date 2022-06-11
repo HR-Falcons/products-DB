@@ -22,8 +22,8 @@ app.get('/', (req, res) => {
 
 // Product routes
 app.get('/products', (req, res) => {
-
-  controllers.product.getProducts()
+  console.log('query data', req.query);
+  controllers.product.getProducts(req.query.count, req.query.page)
   .then(data => (res.send(data)))
   .catch(err => (res.send('Products API has failed!\n Error: ', err)));
 
@@ -31,24 +31,33 @@ app.get('/products', (req, res) => {
 
 app.get('/products/:product_id', (req, res) => {
 
-  console.log('param', req.params.product_id);
   controllers.product.getProductsById(req.params.product_id)
   .then(data => (res.send(data)))
   .catch(err => (res.send('Products API has failed!\n Error: ', err)));
 
 });
+// End of Product routes
 
 // Styles routes
 app.get('/products/:product_id/styles', (req, res) => {
 
-  console.log('param', req.params.product_id);
   controllers.styles.getStylesById(req.params.product_id)
   .then(data => (res.send(data)))
   .catch(err => (res.send('Products API has failed!\n Error: ', err)));
 
 });
 
-// End of Product routes
+// End of Styles routes
+
+// Related routes
+
+app.get('/products/:product_id/related', (req, res) => {
+  controllers.related.getRelatedById(req.params.product_id)
+  .then(data => (res.send(data)))
+  .catch(err => (res.send('Related API has failed!\n Error: ', err)));
+});
+
+// End of Related routes
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`)

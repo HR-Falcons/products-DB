@@ -9,11 +9,11 @@ function getProducts(limit = 5, page = 0) {
 
   let result;
   page = page === 0 ? 0 : page - 1;
+  let offset = limit * page;
+
   return Product.findAll({
-    benchmark: true,
-    logging: console.log,
     limit,
-    offset: (limit * page)})
+    offset})
   .then(data => result = JSON.stringify(data, null, 2))
   .catch(err => console.log('Product failed to return data!\n Error code: ', err));
 }
