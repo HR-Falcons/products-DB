@@ -29,11 +29,7 @@ function getStylesById(product_id = 1) {
       }
    ],
 
-  }, {
-    benchmark: true,
-    logging: console.log,
   })
-  .then(data => result = JSON.stringify(data, null, 2))
   .catch(err => console.log('Style query failed!\n Error code: ', err));
 }
 

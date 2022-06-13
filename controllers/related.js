@@ -16,7 +16,7 @@ function getRelatedById(current_product_id = 1) {
       data.forEach(related_id => {
         result.push(related_id.related_product_id);
       });
-      return JSON.stringify(result, null, 2)
+      return result;
     })
   .catch(err => console.log('Related products call failed. Error: ', err));
 }
