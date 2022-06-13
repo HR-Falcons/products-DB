@@ -2,7 +2,6 @@ const express = require('express');
 const controllers = require('../controllers/controllers.js');
 const app = express();
 const port = 3000;
-jest.setTimeout(10000);
 
 // Env variables
 
