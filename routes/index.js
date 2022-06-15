@@ -68,6 +68,10 @@ app.get('/products/:product_id/related', (req, res) => {
   .catch(err => (res.send('Related API has failed!\n Error: ', err)));
 });
 
+app.get('/loaderio-b98c47b0d85b4e5e01407bc4d1c3795a.txt', (req, res) => {
+  res.sendFile(`${__dirname}/loaderio-b98c47b0d85b4e5e01407bc4d1c3795a.txt`);
+})
+
 // End of Related routes
 
 app.listen(port, () => {
