@@ -31,10 +31,7 @@ function getProductsById(product_id = 1) {
       model: Features,
       attributes: ['feature', 'value']
     }
-  ]}, {
-    benchmark: true,
-    logging: console.log,
-  })
+  ]})
   .catch(err => console.log('Product failed to return data!\n Error code: ', err));
 }
 
