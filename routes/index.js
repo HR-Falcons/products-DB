@@ -1,11 +1,13 @@
 const express = require('express');
 const controllers = require('../controllers/controllers.js');
 const app = express();
+const cors = require('cors');
 const port = 3000;
 
 // Env variables
 
 // Middleware
+app.use(cors());
 
 app.get('/', (req, res) => {
   res.send('You have connected to the Products API!');
