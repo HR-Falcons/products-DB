@@ -21,7 +21,7 @@ app.get('/products', (req, res) => {
     .then(data => (res.status(200).send(data)))
     .catch(err => (res.send('Products API has failed!\n Error: ', err)));
   } else {
-    res.status(400).send({});
+    res.status(500).send({});
   }
 
 });
@@ -34,7 +34,7 @@ app.get('/products/:product_id', (req, res) => {
     .then(data => (res.status(200).send(data)))
     .catch(err => (res.send('Products API has failed!\n Error: ', err)));
   } else {
-    res.status(400).send({});
+    res.status(500).send({});
   }
 
 });
@@ -48,10 +48,15 @@ app.get('/products/:product_id/styles', (req, res) => {
 
     console.log('Params product id: ', isProduct_id);
     controllers.styles.getStylesById(req.params.product_id)
-    .then(data => (res.status(200).send(data)))
+    .then(data => (res.status(200).send(
+      {
+        product_id: req.params.product_id,
+        results: data,
+      }
+    )))
     .catch(err => (res.send('Products API has failed!\n Error: ', err)));
   } else {
-    res.status(400).send({});
+    res.status(500).send({});
   }
 
 
